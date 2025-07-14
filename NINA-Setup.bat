@@ -124,21 +124,21 @@ echo ========================================
 echo Installations-Zusammenfassung:
 echo ========================================
 if %ninaFound% equ 1 (
-    echo NINA: ✓ Erfolgreich
+    echo NINA: Erfolgreich
 ) else (
-    echo NINA: ✗ Fehlgeschlagen
+    echo NINA: Fehlgeschlagen
 )
 
 if %phd2Found% equ 1 (
-    echo PHD2: ✓ Erfolgreich
+    echo PHD2: Erfolgreich
 ) else (
-    echo PHD2: ✗ Fehlgeschlagen
+    echo PHD2: Fehlgeschlagen
 )
 
 if %ascomFound% equ 1 (
-    echo ASCOM: ✓ Erfolgreich
+    echo ASCOM: Erfolgreich
 ) else (
-    echo ASCOM: ✗ Fehlgeschlagen
+    echo ASCOM: Fehlgeschlagen
 )
 
 echo.
