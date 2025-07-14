@@ -9,6 +9,7 @@ This repository provides a Windows batch script to simplify the installation of 
 - Automatic download and installation of:
   - N.I.N.A.
   - ASCOM Platform
+  - PHD2
 - Silent installation (where supported)
 
 
@@ -38,6 +39,7 @@ This script is provided **as is** without warranty. Use at your own risk. The sc
 
 - [N.I.N.A.](https://nighttime-imaging.eu/)
 - [ASCOM Platform](https://ascom-standards.org/)
+- [PHD2](https://openphdguiding.org/)
 
 ---
 
