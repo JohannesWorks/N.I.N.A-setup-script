@@ -1,4 +1,3 @@
-# nina-install-script
 
 # NINA Installation Assistant (Batch Script)
 
