@@ -20,8 +20,8 @@ This repository provides a Windows batch script to simplify the installation of 
 
 ## How to Use
 
-1. Clone or download this repository.
-2. Right-click the `install_nina.bat` file and select **"Run as administrator"**.
+1. Clone or download this repository
+2. Start the script
 3. The script will:
    - Download the latest version of N.I.N.A.
    - Download and install the ASCOM platform
