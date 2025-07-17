@@ -9,6 +9,7 @@ This repository provides a Windows batch script to simplify the installation of 
   - N.I.N.A.
   - ASCOM Platform
   - PHD2
+  - Astap with D50 Database
 - Silent installation (where supported)
 
 
