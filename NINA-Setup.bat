@@ -37,6 +37,21 @@ if /i "%installStellarium%"=="Y" (set "installStellarium=1") else (set "installS
 set /p "installNTP=Install Meinberg NTP Time Sync? (Y/N): "
 if /i "%installNTP%"=="Y" (set "installNTP=1") else (set "installNTP=0")
 
+set /p "installGSS=Install Green Swamp Server SkyWatcher and Orion mounts (ASCOM Driver)? (Y/N): "
+if /i "%installGSS%"=="Y" (set "installGSS=1") else (set "installGSS=0")
+
+set /p "installOnStep=Install OnStep Telescope Control? (Y/N): "
+if /i "%installOnStep%"=="Y" (set "installOnStep=1") else (set "installOnStep=0")
+
+set /p "installZWO=Install ZWO ASCOM Driver? (Y/N): "
+if /i "%installZWO%"=="Y" (set "installZWO=1") else (set "installZWO=0")
+
+set /p "installQHY=Install QHY CCD All-in-One Driver? (Y/N): "
+if /i "%installQHY%"=="Y" (set "installQHY=1") else (set "installQHY=0")
+
+set /p "installToupTek=Install ToupTek ASCOM Driver? (Y/N): "
+if /i "%installToupTek%"=="Y" (set "installToupTek=1") else (set "installToupTek=0")
+
 echo.
 
 :: Check existing installations
@@ -119,6 +134,61 @@ if %ntpInstalled% equ 1 (
     echo [ALREADY INSTALLED] Meinberg NTP found
 ) else (
     echo [NOT INSTALLED] Meinberg NTP
+)
+
+:: Check Green Swamp Server
+set "gssInstalled=0"
+if exist "C:\Program Files\Green Swamp Server" set "gssInstalled=1"
+if exist "C:\Program Files (x86)\Green Swamp Server" set "gssInstalled=1"
+
+if %gssInstalled% equ 1 (
+    echo [ALREADY INSTALLED] Green Swamp Server found
+) else (
+    echo [NOT INSTALLED] Green Swamp Server
+)
+
+:: Check OnStep
+set "onStepInstalled=0"
+if exist "C:\Program Files\OnStep" set "onStepInstalled=1"
+if exist "C:\Program Files (x86)\OnStep" set "onStepInstalled=1"
+
+if %onStepInstalled% equ 1 (
+    echo [ALREADY INSTALLED] OnStep found
+) else (
+    echo [NOT INSTALLED] OnStep
+)
+
+:: Check ZWO ASCOM
+set "zwoInstalled=0"
+if exist "C:\Program Files\ZWO\ASI Camera" set "zwoInstalled=1"
+if exist "C:\Program Files (x86)\ZWO\ASI Camera" set "zwoInstalled=1"
+
+if %zwoInstalled% equ 1 (
+    echo [ALREADY INSTALLED] ZWO ASCOM found
+) else (
+    echo [NOT INSTALLED] ZWO ASCOM
+)
+
+:: Check QHY CCD
+set "qhyInstalled=0"
+if exist "C:\Program Files\QHYCCD" set "qhyInstalled=1"
+if exist "C:\Program Files (x86)\QHYCCD" set "qhyInstalled=1"
+
+if %qhyInstalled% equ 1 (
+    echo [ALREADY INSTALLED] QHY CCD found
+) else (
+    echo [NOT INSTALLED] QHY CCD
+)
+
+:: Check ToupTek ASCOM
+set "toupTekInstalled=0"
+if exist "C:\Program Files\ToupTek" set "toupTekInstalled=1"
+if exist "C:\Program Files (x86)\ToupTek" set "toupTekInstalled=1"
+
+if %toupTekInstalled% equ 1 (
+    echo [ALREADY INSTALLED] ToupTek ASCOM found
+) else (
+    echo [NOT INSTALLED] ToupTek ASCOM
 )
 
 echo.
@@ -282,6 +352,149 @@ if %installNTP% equ 1 (
     )
 ) else (
     echo Skipping Meinberg NTP - not selected
+)
+echo.
+
+:: Green Swamp Server Installation
+if %installGSS% equ 1 (
+    if %gssInstalled% equ 0 (
+        echo Installing Green Swamp Server
+        
+        echo Downloading Green Swamp Server
+        curl -L --progress-bar -o "%TEMP%\ASCOMGSServer1086Setup.zip" "https://github.com/rmorgan001/GSServer/releases/download/v1.0.8.6/ASCOMGSServer1086Setup.zip"
+
+        if exist "%TEMP%\ASCOMGSServer1086Setup.zip" (
+            echo Extracting Green Swamp Server
+            powershell -Command "Expand-Archive -Path '%TEMP%\ASCOMGSServer1086Setup.zip' -DestinationPath '%TEMP%\GSS_Extract' -Force"
+            
+            if exist "%TEMP%\GSS_Extract\ASCOMGSServer1086Setup.exe" (
+                echo Running Green Swamp Server Installation
+                "%TEMP%\GSS_Extract\ASCOMGSServer1086Setup.exe" 
+                timeout /t 10 /nobreak > nul
+                echo Green Swamp Server installation completed
+            ) else (
+                echo [ERROR] ASCOMGSServer1086Setup.exe not found in ZIP
+            )
+            
+            rd /s /q "%TEMP%\GSS_Extract" 2>nul
+            del "%TEMP%\ASCOMGSServer1086Setup.zip" 2>nul
+        ) else (
+            echo [ERROR] Green Swamp Server Download failed
+        )
+    ) else (
+        echo Skipping Green Swamp Server - already installed
+    )
+) else (
+    echo Skipping Green Swamp Server - not selected
+)
+echo.
+
+:: OnStep Installation
+if %installOnStep% equ 1 (
+    if %onStepInstalled% equ 0 (
+        echo Installing OnStep Telescope Control
+        
+        echo Downloading OnStep
+        curl -L --progress-bar -o "%TEMP%\OnStep-Setup-1.0.43.zip" "http://www.stellarjourney.com/assets/downloads/OnStep-Setup-1.0.43.zip"
+
+        if exist "%TEMP%\OnStep-Setup-1.0.43.zip" (
+            echo Extracting OnStep
+            powershell -Command "Expand-Archive -Path '%TEMP%\OnStep-Setup-1.0.43.zip' -DestinationPath '%TEMP%\OnStep_Extract' -Force"
+            
+            if exist "%TEMP%\OnStep_Extract\OnStep Setup.exe" (
+                echo Running OnStep Installation
+                "%TEMP%\OnStep_Extract\OnStep Setup.exe" 
+                timeout /t 10 /nobreak > nul
+                echo OnStep installation completed
+            ) else (
+                echo [ERROR] OnStep Setup.exe.exe not found in ZIP
+            )
+            
+            rd /s /q "%TEMP%\OnStep_Extract" 2>nul
+            del "%TEMP%\OnStep-Setup-1.0.43.zip" 2>nul
+        ) else (
+            echo [ERROR] OnStep Download failed
+        )
+    ) else (
+        echo Skipping OnStep - already installed
+    )
+) else (
+    echo Skipping OnStep - not selected
+)
+echo.
+
+:: ZWO ASCOM Installation
+if %installZWO% equ 1 (
+    if %zwoInstalled% equ 0 (
+        echo Installing ZWO ASCOM Driver
+        
+        echo Downloading ZWO ASCOM Driver
+        curl -L --progress-bar -o "%TEMP%\ZWO_ASCOM_Setup_V6.5.30.exe" "https://dl.zwoastro.com/software?app=ASCOMDrive&platform=windows64&region=Overseas"
+
+        if exist "%TEMP%\ZWO_ASCOM_Setup_V6.5.30.exe" (
+            echo Running ZWO ASCOM Installation
+            "%TEMP%\ZWO_ASCOM_Setup_V6.5.30.exe" 
+            timeout /t 10 /nobreak > nul
+            del "%TEMP%\ZWO_ASCOM_Setup_V6.5.30.exe" 2>nul
+            echo ZWO ASCOM installation completed
+        ) else (
+            echo [ERROR] ZWO ASCOM Download failed
+        )
+    ) else (
+        echo Skipping ZWO ASCOM - already installed
+    )
+) else (
+    echo Skipping ZWO ASCOM - not selected
+)
+echo.
+
+:: QHY CCD Installation
+if %installQHY% equ 1 (
+    if %qhyInstalled% equ 0 (
+        echo Installing QHY CCD All-in-One Driver
+        
+        echo Downloading QHY CCD Driver
+        curl -L --progress-bar -o "%TEMP%\QHYCCD_Win_AllInOne.24.12.27.10.exe" "https://www.qhyccd.com/file/repository/publish/AllInOne/24.12.27/QHYCCD_Win_AllInOne.24.12.27.10.exe"
+
+        if exist "%TEMP%\QHYCCD_Win_AllInOne.24.12.27.10.exe" (
+            echo Running QHY CCD Installation
+            "%TEMP%\QHYCCD_Win_AllInOne.24.12.27.10.exe" 
+            timeout /t 15 /nobreak > nul
+            del "%TEMP%\QHYCCD_Win_AllInOne.24.12.27.10.exe" 2>nul
+            echo QHY CCD installation completed
+        ) else (
+            echo [ERROR] QHY CCD Download failed
+        )
+    ) else (
+        echo Skipping QHY CCD - already installed
+    )
+) else (
+    echo Skipping QHY CCD - not selected
+)
+echo.
+
+:: ToupTek ASCOM Installation
+if %installToupTek% equ 1 (
+    if %toupTekInstalled% equ 0 (
+        echo Installing ToupTek ASCOM Driver
+        
+        echo Downloading ToupTek ASCOM Driver
+        curl -L --progress-bar -o "%TEMP%\ToupTekASCOMSetup.exe" "https://www.touptek-astro.com/dl_software/ToupTekASCOMSetup.exe"
+
+        if exist "%TEMP%\ToupTekASCOMSetup.exe" (
+            echo Running ToupTek ASCOM Installation
+            "%TEMP%\ToupTekASCOMSetup.exe" 
+            timeout /t 10 /nobreak > nul
+            del "%TEMP%\ToupTekASCOMSetup.exe" 2>nul
+            echo ToupTek ASCOM installation completed
+        ) else (
+            echo [ERROR] ToupTek ASCOM Download failed
+        )
+    ) else (
+        echo Skipping ToupTek ASCOM - already installed
+    )
+) else (
+    echo Skipping ToupTek ASCOM - not selected
 )
 echo.
 
