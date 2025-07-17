@@ -6,7 +6,7 @@ This repository provides a Windows batch script to simplify the installation of 
 ## Features
 
 - Automatic download and installation of:
-  - N.I.N.A.
+  - N.I.N.A. with offline Skymap 
   - ASCOM Platform
   - PHD2
   - Astap with D50 Database
