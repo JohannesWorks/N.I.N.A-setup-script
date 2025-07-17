@@ -43,6 +43,13 @@ if /i "%installGSS%"=="Y" (set "installGSS=1") else (set "installGSS=0")
 set /p "installOnStep=Install OnStep Telescope Control? (Y/N): "
 if /i "%installOnStep%"=="Y" (set "installOnStep=1") else (set "installOnStep=0")
 
+set /p "installOAT=Install OpenAstroTracker Control? (Y/N): "
+if /i "%installOAT%"=="Y" (set "installOAT=1") else (set "installOAT=0")
+
+set /p "installOATASCOM=Install OpenAstroTracker ASCOM Driver? (Y/N): "
+if /i "%installOATASCOM%"=="Y" (set "installOATASCOM=1") else (set "installOATASCOM=0")
+
+
 set /p "installZWO=Install ZWO ASCOM Driver? (Y/N): "
 if /i "%installZWO%"=="Y" (set "installZWO=1") else (set "installZWO=0")
 
@@ -52,8 +59,6 @@ if /i "%installQHY%"=="Y" (set "installQHY=1") else (set "installQHY=0")
 set /p "installToupTek=Install ToupTek ASCOM Driver? (Y/N): "
 if /i "%installToupTek%"=="Y" (set "installToupTek=1") else (set "installToupTek=0")
 
-set /p "installOAT=Install OpenAstroTracker Control? (Y/N): "
-if /i "%installOAT%"=="Y" (set "installOAT=1") else (set "installOAT=0")
 
 echo.
 
@@ -161,6 +166,32 @@ if %onStepInstalled% equ 1 (
     echo [NOT INSTALLED] OnStep
 )
 
+:: Check OpenAstroTracker Control
+set "oatInstalled=0"
+if exist "C:\Program Files\OpenAstroTracker" set "oatInstalled=1"
+if exist "C:\Program Files (x86)\OpenAstroTracker" set "oatInstalled=1"
+
+if %oatInstalled% equ 1 (
+    echo [ALREADY INSTALLED] OpenAstroTracker Control found
+) else (
+    echo [NOT INSTALLED] OpenAstroTracker Control
+)
+
+:: Check OpenAstroTracker ASCOM Driver
+set "oatAscomInstalled=0"
+if exist "C:\Program Files\ASCOM\Telescope" (
+    if exist "C:\Program Files\ASCOM\Telescope\*OpenAstroTracker*" set "oatAscomInstalled=1"
+)
+if exist "C:\Program Files (x86)\ASCOM\Telescope" (
+    if exist "C:\Program Files (x86)\ASCOM\Telescope\*OpenAstroTracker*" set "oatAscomInstalled=1"
+)
+
+if %oatAscomInstalled% equ 1 (
+    echo [ALREADY INSTALLED] OpenAstroTracker ASCOM Driver found
+) else (
+    echo [NOT INSTALLED] OpenAstroTracker ASCOM Driver
+)
+
 :: Check ZWO ASCOM
 set "zwoInstalled=0"
 if exist "C:\Program Files\ZWO\ASI Camera" set "zwoInstalled=1"
@@ -194,16 +225,7 @@ if %toupTekInstalled% equ 1 (
     echo [NOT INSTALLED] ToupTek ASCOM
 )
 
-:: Check OpenAstroTracker Control
-set "oatInstalled=0"
-if exist "C:\Program Files\OpenAstroTracker" set "oatInstalled=1"
-if exist "C:\Program Files (x86)\OpenAstroTracker" set "oatInstalled=1"
 
-if %oatInstalled% equ 1 (
-    echo [ALREADY INSTALLED] OpenAstroTracker Control found
-) else (
-    echo [NOT INSTALLED] OpenAstroTracker Control
-)
 
 echo.
 
@@ -443,13 +465,13 @@ if %installOAT% equ 1 (
         echo Installing OpenAstroTracker Control
         
         echo Downloading OpenAstroTracker Control
-        curl -L --progress-bar -o "%TEMP%\OATControl.msi" "https://github.com/OpenAstroTech/OpenAstroTracker-Desktop/releases/latest/download/OATControl.msi"
+        curl -L --progress-bar -o "%TEMP%\OATControlSetup.exe" "https://github.com/OpenAstroTech/OpenAstroTracker-Desktop/releases/download/V1.1.8.0/OATControlSetup.exe"
 
-        if exist "%TEMP%\OATControl.msi" (
+        if exist "%TEMP%\OATControlSetup.exe" (
             echo Running OpenAstroTracker Control Installation
-            msiexec /i "%TEMP%\OATControl.msi" /quiet
+            "%TEMP%\OATControlSetup.exe" 
             timeout /t 10 /nobreak > nul
-            del "%TEMP%\OATControl.msi" 2>nul
+            del "%TEMP%\OATControlSetup.exe" 2>nul
             echo OpenAstroTracker Control installation completed
         ) else (
             echo [ERROR] OpenAstroTracker Control Download failed
@@ -459,6 +481,31 @@ if %installOAT% equ 1 (
     )
 ) else (
     echo Skipping OpenAstroTracker Control - not selected
+)
+echo.
+
+:: OpenAstroTracker ASCOM Driver Installation
+if %installOATASCOM% equ 1 (
+    if %oatAscomInstalled% equ 0 (
+        echo Installing OpenAstroTracker ASCOM Driver
+        
+        echo Downloading OpenAstroTracker ASCOM Driver
+        curl -L --progress-bar -o "%TEMP%\OpenAstroTracker.Setup.exe" "https://github.com/OpenAstroTech/OpenAstroTracker-Desktop/releases/download/V6.6.7.2/OpenAstroTracker.Setup.exe"
+
+        if exist "%TEMP%\OpenAstroTracker.Setup.exe" (
+            echo Running OpenAstroTracker ASCOM Driver Installation
+            "%TEMP%\OpenAstroTracker.Setup.exe" 
+            timeout /t 10 /nobreak > nul
+            del "%TEMP%\OpenAstroTracker.Setup.exe" 2>nul
+            echo OpenAstroTracker ASCOM Driver installation completed
+        ) else (
+            echo [ERROR] OpenAstroTracker ASCOM Driver Download failed
+        )
+    ) else (
+        echo Skipping OpenAstroTracker ASCOM Driver - already installed
+    )
+) else (
+    echo Skipping OpenAstroTracker ASCOM Driver - not selected
 )
 echo.
 

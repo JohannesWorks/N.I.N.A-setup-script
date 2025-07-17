@@ -12,7 +12,7 @@ This repository provides a comprehensive Windows batch script to simplify the in
 
 ### Supported Software Components
 
-This script installs **12 essential components** for a complete astrophotography setup:
+This script installs **14 essential components** for a complete astrophotography setup:
 
 #### 🔭 **N.I.N.A. (Nighttime Imaging 'N' Astronomy)**
 - Installed via winget package manager
@@ -65,8 +65,13 @@ This script installs **12 essential components** for a complete astrophotography
 
 #### 🔧 **OpenAstroTracker Control**
 - Control software for OpenAstroTracker (OAT) mounts
-- Latest version from GitHub releases
+- Version 1.1.8.0 from GitHub releases
 - DIY star tracker and telescope mount control
+
+#### 📡 **OpenAstroTracker ASCOM Driver**
+- ASCOM telescope driver for OpenAstroTracker mounts
+- Version 6.6.7.2 from GitHub releases
+- Enables ASCOM compatibility for OAT mounts
 
 #### 📷 **ZWO ASCOM Driver**
 - ASCOM driver for ZWO ASI cameras
@@ -95,7 +100,7 @@ The script includes drivers for all major astrophotography camera brands:
 Multiple telescope mount control options:
 - **Green Swamp Server** - SkyWatcher & Orion mounts (EQ8, EQ8-R, HDX110, etc.)
 - **OnStep** - Arduino-based DIY GoTo controller
-- **OpenAstroTracker** - DIY star tracker and telescope mount control
+- **OpenAstroTracker Control & ASCOM Driver** - DIY star tracker and telescope mount control
 - **ASCOM Platform** - Universal device communication standard
 
 ### ⚙️ **Essential Utilities**
@@ -139,6 +144,7 @@ Install Meinberg NTP Time Sync? (Y/N): Y
 Install Green Swamp Server (ASCOM Driver)? (Y/N): Y
 Install OnStep Telescope Control? (Y/N): Y
 Install OpenAstroTracker Control? (Y/N): Y
+Install OpenAstroTracker ASCOM Driver? (Y/N): Y
 Install ZWO ASCOM Driver? (Y/N): Y
 Install QHY CCD All-in-One Driver? (Y/N): Y
 Install ToupTek ASCOM Driver? (Y/N): Y
@@ -170,6 +176,8 @@ Typical installation times (depends on internet speed):
 - **Meinberg NTP**: Official Meinberg download (meinberg.de)
 - **Green Swamp Server**: GitHub Releases (rmorgan001/GSServer)
 - **OnStep**: stellarjourney.com downloads
+- **OpenAstroTracker Control**: GitHub Releases (OpenAstroTech/OpenAstroTracker-Desktop)
+- **OpenAstroTracker ASCOM**: GitHub Releases (OpenAstroTech/OpenAstroTracker-Desktop)
 - **ZWO ASCOM**: Official ZWO downloads (dl.zwoastro.com)
 - **QHY CCD**: Official QHY downloads (qhyccd.com)
 - **ToupTek ASCOM**: Official ToupTek downloads (touptek-astro.com)
@@ -248,6 +256,7 @@ This script is provided **as is** without warranty. Use at your own risk. The sc
 - [Meinberg NTP](https://www.meinberg.de/)
 - [Green Swamp Server](https://greenswamp.org/?page_id=834)
 - [OnStep](http://www.stellarjourney.com/index.php?r=site/software_telescope)
+- [OpenAstroTracker](https://github.com/OpenAstroTech/OpenAstroTracker-Desktop)
 - [ZWO ASCOM](https://www.zwoastro.com/)
 - [QHY CCD](https://www.qhyccd.com/)
 - [ToupTek ASCOM](https://www.touptek-astro.com/)
