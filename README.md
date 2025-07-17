@@ -63,6 +63,11 @@ This script installs **12 essential components** for a complete astrophotography
 - Version 1.0.43 from stellarjourney.com
 - Arduino-based GoTo telescope controller
 
+#### 🔧 **OpenAstroTracker Control**
+- Control software for OpenAstroTracker (OAT) mounts
+- Latest version from GitHub releases
+- DIY star tracker and telescope mount control
+
 #### 📷 **ZWO ASCOM Driver**
 - ASCOM driver for ZWO ASI cameras
 - Version 6.5.30 from ZWO official downloads
@@ -90,6 +95,7 @@ The script includes drivers for all major astrophotography camera brands:
 Multiple telescope mount control options:
 - **Green Swamp Server** - SkyWatcher & Orion mounts (EQ8, EQ8-R, HDX110, etc.)
 - **OnStep** - Arduino-based DIY GoTo controller
+- **OpenAstroTracker** - DIY star tracker and telescope mount control
 - **ASCOM Platform** - Universal device communication standard
 
 ### ⚙️ **Essential Utilities**
@@ -132,6 +138,7 @@ Install Stellarium? (Y/N): Y
 Install Meinberg NTP Time Sync? (Y/N): Y
 Install Green Swamp Server (ASCOM Driver)? (Y/N): Y
 Install OnStep Telescope Control? (Y/N): Y
+Install OpenAstroTracker Control? (Y/N): Y
 Install ZWO ASCOM Driver? (Y/N): Y
 Install QHY CCD All-in-One Driver? (Y/N): Y
 Install ToupTek ASCOM Driver? (Y/N): Y
