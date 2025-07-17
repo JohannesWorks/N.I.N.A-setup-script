@@ -42,6 +42,15 @@ This repository provides a Windows batch script to simplify the installation of 
 - Optimized for fields of view ≥ 0.6 degrees
 - Required for ASTAP plate solving functionality
 
+#### 🌟 **Stellarium**
+- Comprehensive planetarium software
+- Installed via winget package manager
+- Sky simulation and astronomical object tracking
+
+#### ⏰ **Meinberg NTP Time Sync**
+- Precise time synchronization for astrophotography
+- Ensures accurate timestamps for imaging sessions
+
 ## Requirements
 
 - **Windows 10 or newer**
@@ -67,6 +76,8 @@ Install PHD2? (Y/N): Y
 Install ASCOM? (Y/N): Y
 Install ASTAP? (Y/N): Y
 Install D50 Star Database? (Y/N): Y
+Install Stellarium? (Y/N): Y
+Install Meinberg NTP Time Sync? (Y/N): Y
 ```
 
 ### 3. Automated Installation
@@ -84,6 +95,8 @@ Install D50 Star Database? (Y/N): Y
 - **ASCOM**: GitHub Releases (ASCOMInitiative/ASCOMPlatform)
 - **ASTAP**: SourceForge (astap-program)
 - **D50 Database**: SourceForge (astap-program)
+- **Stellarium**: Windows Package Manager (winget)
+- **Meinberg NTP**: Official Meinberg download (meinberg.de)
 
 
 ## Troubleshooting
@@ -110,6 +123,8 @@ This script is provided **as is** without warranty. Use at your own risk. The sc
 - [PHD2 Guiding](https://openphdguiding.org/)
 - [ASTAP Astrometric Solver](https://www.hnsky.org/astap.htm)
 - [Sky Map Cache](https://nighttime-imaging.eu/download/)
+- [Stellarium](https://stellarium.org/)
+- [Meinberg NTP](https://www.meinberg.de/)
 
 ---
 
