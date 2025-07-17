@@ -67,11 +67,15 @@ This script installs **14 essential components** for a complete astrophotography
 - Control software for OpenAstroTracker (OAT) mounts
 - Version 1.1.8.0 from GitHub releases
 - DIY star tracker and telescope mount control
+- Direct serial/WiFi connection to OAT hardware
+- Manual control, polar alignment, and mount configuration
 
 #### 📡 **OpenAstroTracker ASCOM Driver**
 - ASCOM telescope driver for OpenAstroTracker mounts
 - Version 6.6.7.2 from GitHub releases
 - Enables ASCOM compatibility for OAT mounts
+- Integrates OAT with NINA, PHD2, and other ASCOM applications
+- Supports GoTo functionality and tracking
 
 #### 📷 **ZWO ASCOM Driver**
 - ASCOM driver for ZWO ASI cameras
@@ -100,7 +104,7 @@ The script includes drivers for all major astrophotography camera brands:
 Multiple telescope mount control options:
 - **Green Swamp Server** - SkyWatcher & Orion mounts (EQ8, EQ8-R, HDX110, etc.)
 - **OnStep** - Arduino-based DIY GoTo controller
-- **OpenAstroTracker Control & ASCOM Driver** - DIY star tracker and telescope mount control
+- **OpenAstroTracker Control & ASCOM Driver** - DIY 3D-printed star tracker and GoTo mount control
 - **ASCOM Platform** - Universal device communication standard
 
 ### ⚙️ **Essential Utilities**
@@ -108,6 +112,33 @@ Multiple telescope mount control options:
 - **Meinberg NTP** - Precise time synchronization
 - **ASTAP + D50 Database** - Plate solving for accurate positioning
 - **PHD2** - Professional autoguiding solution
+
+### 🛠️ **OpenAstroTracker (OAT) - DIY Mount Solution**
+The OpenAstroTracker is a popular open-source, 3D-printable telescope mount project:
+
+#### **What is OpenAstroTracker?**
+- **DIY 3D-printed mount** - Complete hardware plans and 3D models available
+- **Arduino-based control** - Uses Arduino Mega with stepper motor drivers
+- **Dual functionality** - Works as both star tracker and GoTo telescope mount
+- **Open source** - Hardware and software designs freely available
+
+#### **OAT Control vs ASCOM Driver**
+- **OAT Control** - Standalone desktop application for direct mount control
+  - Manual mount operation and configuration
+  - Polar alignment assistance
+  - Firmware updates and diagnostics
+  - Direct serial or WiFi connection to mount
+  
+- **ASCOM Driver** - Integration with astrophotography software
+  - Connects OAT to NINA, PHD2, and other ASCOM applications
+  - Enables automated imaging sequences
+  - GoTo functionality for object targeting
+  - Essential for integrated astrophotography workflows
+
+#### **Installation Recommendation**
+Install **both components** if you own an OpenAstroTracker:
+1. **OAT Control** - For initial setup, configuration, and troubleshooting
+2. **ASCOM Driver** - For integration with your astrophotography software suite
 
 ## Requirements
 
@@ -217,9 +248,15 @@ For manual installation or troubleshooting:
 4. **NINA** (main application)
 5. **PHD2** (autoguiding)
 6. **Stellarium** (planetarium)
-7. **Mount drivers** (Green Swamp Server or OnStep)
+7. **Mount drivers** (Green Swamp Server, OnStep, or OpenAstroTracker)
 8. **ASTAP + D50 Database** (plate solving)
 9. **Sky Map cache** (offline functionality)
+
+### OpenAstroTracker Specific Notes
+- **OAT Control** should be installed first for initial mount setup
+- **OAT ASCOM Driver** should be installed after ASCOM Platform
+- Both components can be installed independently based on your needs
+- Ensure your OpenAstroTracker firmware is compatible with the driver version
 
 ## Performance Notes
 
