@@ -31,6 +31,12 @@ if %installAstap% equ 1 (
     set "installD50=0"
 )
 
+set /p "installStellarium=Install Stellarium? (Y/N): "
+if /i "%installStellarium%"=="Y" (set "installStellarium=1") else (set "installStellarium=0")
+
+set /p "installNTP=Install Meinberg NTP Time Sync? (Y/N): "
+if /i "%installNTP%"=="Y" (set "installNTP=1") else (set "installNTP=0")
+
 echo.
 
 :: Check existing installations
@@ -40,7 +46,7 @@ echo Checking existing installations
 set "ninaInstalled=0"
 if exist "C:\Program Files\N.I.N.A. - Nighttime Imaging 'N' Astronomy" set "ninaInstalled=1"
 if exist "C:\Program Files (x86)\N.I.N.A. - Nighttime Imaging 'N' Astronomy" set "ninaInstalled=1"
-
+y
 if %ninaInstalled% equ 1 (
     echo [ALREADY INSTALLED] NINA found
 ) else (
@@ -91,6 +97,28 @@ if %skyMapInstalled% equ 1 (
     echo [ALREADY INSTALLED] Offline Sky Map found
 ) else (
     echo [NOT INSTALLED] Offline Sky Map
+)
+
+:: Check Stellarium
+set "stellariumInstalled=0"
+if exist "C:\Program Files\Stellarium" set "stellariumInstalled=1"
+if exist "C:\Program Files (x86)\Stellarium" set "stellariumInstalled=1"
+
+if %stellariumInstalled% equ 1 (
+    echo [ALREADY INSTALLED] Stellarium found
+) else (
+    echo [NOT INSTALLED] Stellarium
+)
+
+:: Check Meinberg NTP
+set "ntpInstalled=0"
+if exist "C:\Program Files\NTP" set "ntpInstalled=1"
+if exist "C:\Program Files (x86)\NTP" set "ntpInstalled=1"
+
+if %ntpInstalled% equ 1 (
+    echo [ALREADY INSTALLED] Meinberg NTP found
+) else (
+    echo [NOT INSTALLED] Meinberg NTP
 )
 
 echo.
@@ -220,6 +248,42 @@ if %installSkyMap% equ 1 (
 )
 echo.
 
+:: Stellarium Installation
+if %installStellarium% equ 1 (
+    if %stellariumInstalled% equ 0 (
+        echo Installing Stellarium
+        winget install --id=Stellarium.Stellarium 
+        echo Skipping Stellarium - already installed
+    )
+) else (
+    echo Skipping Stellarium - not selected
+)
+echo.
+
+:: Meinberg NTP Installation
+if %installNTP% equ 1 (
+    if %ntpInstalled% equ 0 (
+        echo Installing Meinberg NTP Time Sync
+        
+        echo Downloading Meinberg NTP
+        curl -L --progress-bar -o "%TEMP%\ntp-4.2.8p15a-win32-setup.exe" "https://www.meinberg.de/download/ntp/windows/ntp-4.2.8p15a-win32-setup.exe"
+
+        if exist "%TEMP%\ntp-4.2.8p15a-win32-setup.exe" (
+            echo Running Meinberg NTP Installation
+            "%TEMP%\ntp-4.2.8p15a-win32-setup.exe" 
+            timeout /t 5 /nobreak > nul
+            del "%TEMP%\ntp-4.2.8p15a-win32-setup.exe" 2>nul
+            echo Meinberg NTP installation completed
+        ) else (
+            echo [ERROR] Meinberg NTP Download failed
+        )
+    ) else (
+        echo Skipping Meinberg NTP - already installed
+    )
+) else (
+    echo Skipping Meinberg NTP - not selected
+)
+echo.
 
 echo.
 echo Script completed!
