@@ -63,14 +63,14 @@ NINA-Setup.bat
 The script will prompt you to select which components to install:
 
 ```
-Waehlen Sie die zu installierenden Programme aus:
+Choose which programs to install:
 
-NINA installieren? (J/N): J
-Offline Sky Map installieren ca. 3,3 GB? (J/N): J
-PHD2 installieren? (J/N): J
-ASCOM installieren? (J/N): J
-ASTAP installieren? (J/N): J
-D50 Sterne-Datenbank installieren? (J/N): J
+Install NINA? (Y/N): Y
+Install Offline Sky Map approx. 3.3 GB? (Y/N): Y
+Install PHD2? (Y/N): Y
+Install ASCOM? (Y/N): Y
+Install ASTAP? (Y/N): Y
+Install D50 Star Database? (Y/N): Y
 ```
 
 ### 3. Automated Installation

@@ -5,92 +5,92 @@ echo NINA, PHD2, ASCOM, ASTAP, D50 & Sky Map Installation
 echo ========================================
 echo.
 
-:: Benutzerabfrage für gewünschte Software
-echo Waehlen Sie die zu installierenden Programme aus:
+:: User selection for desired software
+echo Choose which programs to install:
 echo.
 
-set /p "installNina=NINA installieren? (J/N): "
-if /i "%installNina%"=="J" (set "installNina=1") else (set "installNina=0")
+set /p "installNina=Install NINA? (Y/N): "
+if /i "%installNina%"=="Y" (set "installNina=1") else (set "installNina=0")
 
-set /p "installSkyMap=Offline Sky Map installieren ca. 3,3 GB? (J/N): "
-if /i "%installSkyMap%"=="J" (set "installSkyMap=1") else (set "installSkyMap=0")
+set /p "installSkyMap=Install Offline Sky Map Cache 3.3 GB? (Y/N): "
+if /i "%installSkyMap%"=="Y" (set "installSkyMap=1") else (set "installSkyMap=0")
 
-set /p "installPhd2=PHD2 installieren? (J/N): "
-if /i "%installPhd2%"=="J" (set "installPhd2=1") else (set "installPhd2=0")
+set /p "installPhd2=Install PHD2? (Y/N): "
+if /i "%installPhd2%"=="Y" (set "installPhd2=1") else (set "installPhd2=0")
 
-set /p "installAscom=ASCOM installieren? (J/N): "
-if /i "%installAscom%"=="J" (set "installAscom=1") else (set "installAscom=0")
+set /p "installAscom=Install ASCOM? (Y/N): "
+if /i "%installAscom%"=="Y" (set "installAscom=1") else (set "installAscom=0")
 
-set /p "installAstap=ASTAP installieren? (J/N): "
-if /i "%installAstap%"=="J" (set "installAstap=1") else (set "installAstap=0")
+set /p "installAstap=Install ASTAP? (Y/N): "
+if /i "%installAstap%"=="Y" (set "installAstap=1") else (set "installAstap=0")
 
 if %installAstap% equ 1 (
-    set /p "installD50=D50 Sterne-Datenbank installieren? (J/N): "
-    if /i "%installD50%"=="J" (set "installD50=1") else (set "installD50=0")
+    set /p "installD50=Install D50 Star Database? (Y/N): "
+    if /i "%installD50%"=="Y" (set "installD50=1") else (set "installD50=0")
 ) else (
     set "installD50=0"
 )
 
 echo.
 
-:: Prüfe vorhandene Installationen
-echo Pruefe vorhandene Installationen
+:: Check existing installations
+echo Checking existing installations
 
-:: NINA prüfen
+:: Check NINA
 set "ninaInstalled=0"
 if exist "C:\Program Files\N.I.N.A. - Nighttime Imaging 'N' Astronomy" set "ninaInstalled=1"
 if exist "C:\Program Files (x86)\N.I.N.A. - Nighttime Imaging 'N' Astronomy" set "ninaInstalled=1"
 
 if %ninaInstalled% equ 1 (
-    echo [BEREITS INSTALLIERT] NINA gefunden
+    echo [ALREADY INSTALLED] NINA found
 ) else (
-    echo [NICHT INSTALLIERT] NINA
+    echo [NOT INSTALLED] NINA
 )
 
-:: PHD2 prüfen
+:: Check PHD2
 set "phd2Installed=0"
 if exist "C:\Program Files\PHDGuiding2" set "phd2Installed=1"
 if exist "C:\Program Files (x86)\PHDGuiding2" set "phd2Installed=1"
 
 if %phd2Installed% equ 1 (
-    echo [BEREITS INSTALLIERT] PHD2 gefunden
+    echo [ALREADY INSTALLED] PHD2 found
 ) else (
-    echo [NICHT INSTALLIERT] PHD2
+    echo [NOT INSTALLED] PHD2
 )
 
-:: ASCOM prüfen (bessere Pfadprüfung)
+:: Check ASCOM (better path checking)
 set "ascomInstalled=0"
 if exist "C:\Program Files\ASCOM\Platform" set "ascomInstalled=1"
 if exist "C:\Program Files (x86)\ASCOM\Platform" set "ascomInstalled=1"
 
 if %ascomInstalled% equ 1 (
-    echo [BEREITS INSTALLIERT] ASCOM gefunden
+    echo [ALREADY INSTALLED] ASCOM found
 ) else (
-    echo [NICHT INSTALLIERT] ASCOM
+    echo [NOT INSTALLED] ASCOM
 )
 
-:: ASTAP prüfen
+:: Check ASTAP
 set "astapInstalled=0"
 if exist "C:\Program Files\astap\astap.exe" set "astapInstalled=1"
 if exist "C:\Program Files (x86)\astap\astap.exe" set "astapInstalled=1"
 
 if %astapInstalled% equ 1 (
-    echo [BEREITS INSTALLIERT] ASTAP gefunden
+    echo [ALREADY INSTALLED] ASTAP found
 ) else (
-    echo [NICHT INSTALLIERT] ASTAP
+    echo [NOT INSTALLED] ASTAP
 )
 
-:: D50 Datenbank prüfen
+:: Check D50 Database
 set "d50Installed=0"
 
-:: Offline Sky Map prüfen
+:: Check Offline Sky Map
 set "skyMapInstalled=0"
 if exist "C:\OfflineSkyMap\FramingAssistantCache" set "skyMapInstalled=1"
 
 if %skyMapInstalled% equ 1 (
-    echo [BEREITS INSTALLIERT] Offline Sky Map gefunden
+    echo [ALREADY INSTALLED] Offline Sky Map found
 ) else (
-    echo [NICHT INSTALLIERT] Offline Sky Map
+    echo [NOT INSTALLED] Offline Sky Map
 )
 
 echo.
@@ -98,129 +98,129 @@ echo.
 :: NINA Installation
 if %installNina% equ 1 (
     if %ninaInstalled% equ 0 (
-        echo Installiere NINA
+        echo Installing NINA
         winget install --id=StefanBerg.NINA --silent
     ) else (
-        echo Ueberspringe NINA - bereits installiert
+        echo Skipping NINA - already installed
     )
 ) else (
-    echo Ueberspringe NINA - nicht ausgewaehlt
+    echo Skipping NINA - not selected
 )
 echo.
 
 :: PHD2 Installation
 if %installPhd2% equ 1 (
     if %phd2Installed% equ 0 (
-        echo Installiere PHD2
+        echo Installing PHD2
         winget install --id=OpenPHDGuiding.PHD2 --silent
     ) else (
-        echo Ueberspringe PHD2 - bereits installiert
+        echo Skipping PHD2 - already installed
     )
 ) else (
-    echo Ueberspringe PHD2 - nicht ausgewaehlt
+    echo Skipping PHD2 - not selected
 )
 echo.
 
 :: ASCOM Installation
 if %installAscom% equ 1 (
     if %ascomInstalled% equ 0 (
-        echo Installiere ASCOM Platform 
+        echo Installing ASCOM Platform 
         
-        echo Lade ASCOM herunter
+        echo Downloading ASCOM
         curl -L --progress-bar -o "%TEMP%\AscomPlatform702.4675.exe" "https://github.com/ASCOMInitiative/ASCOMPlatform/releases/download/v7.0.2/AscomPlatform702.4675.exe"
 
         if exist "%TEMP%\AscomPlatform702.4675.exe" (
-            echo Fuehre ASCOM Installation aus
+            echo Running ASCOM Installation
             "%TEMP%\AscomPlatform702.4675.exe" /SILENT
             timeout /t 5 /nobreak > nul
             del "%TEMP%\AscomPlatform702.4675.exe" 2>nul
         ) else (
-            echo [FEHLER] ASCOM Download fehlgeschlagen
+            echo [ERROR] ASCOM Download failed
         )
     ) else (
-        echo Ueberspringe ASCOM - bereits installiert
+        echo Skipping ASCOM - already installed
     )
 ) else (
-    echo Ueberspringe ASCOM - nicht ausgewaehlt
+    echo Skipping ASCOM - not selected
 )
 echo.
 
 :: ASTAP Installation
 if %installAstap% equ 1 (
     if %astapInstalled% equ 0 (
-        echo Installiere ASTAP
+        echo Installing ASTAP
         
-        echo Lade ASTAP herunter
+        echo Downloading ASTAP
         curl -L --progress-bar -o "%TEMP%\astap_setup.exe" "https://sourceforge.net/projects/astap-program/files/windows_installer/astap_setup.exe/download"
 
         if exist "%TEMP%\astap_setup.exe" (
-            echo Fuehre ASTAP Installation aus
+            echo Running ASTAP Installation
             "%TEMP%\astap_setup.exe" /SILENT
             timeout /t 5 /nobreak > nul
             del "%TEMP%\astap_setup.exe" 2>nul
         ) else (
-            echo [FEHLER] ASTAP Download fehlgeschlagen
+            echo [ERROR] ASTAP Download failed
         )
     ) else (
-        echo Ueberspringe ASTAP - bereits installiert
+        echo Skipping ASTAP - already installed
     )
 ) else (
-    echo Ueberspringe ASTAP - nicht ausgewaehlt
+    echo Skipping ASTAP - not selected
 )
 echo.
 
-:: D50 Datenbank Installation
+:: D50 Database Installation
 if %installD50% equ 1 (
     if %d50Installed% equ 0 (
-        echo Installiere D50 Sterne-Datenbank
+        echo Installing D50 Star Database
         
-        echo Lade D50 Datenbank herunter
+        echo Downloading D50 Database
         curl -L --progress-bar -o "%TEMP%\d50_star_database.exe" "https://sourceforge.net/projects/astap-program/files/star_databases/d50_star_database.exe/download"
 
         if exist "%TEMP%\d50_star_database.exe" (
-            echo Fuehre D50 Datenbank Installation aus
+            echo Running D50 Database Installation
             "%TEMP%\d50_star_database.exe" /SILENT
             timeout /t 5 /nobreak > nul
             del "%TEMP%\d50_star_database.exe" 2>nul
         ) else (
-            echo [FEHLER] D50 Datenbank Download fehlgeschlagen
+            echo [ERROR] D50 Database Download failed
         )
     ) else (
-        echo Ueberspringe D50 Datenbank - bereits installiert
+        echo Skipping D50 Database - already installed
     )
 ) else (
-    echo Ueberspringe D50 Datenbank - nicht ausgewaehlt
+    echo Skipping D50 Database - not selected
 )
 echo.
 
 :: Offline Sky Map Installation
 if %installSkyMap% equ 1 (
     if %skyMapInstalled% equ 0 (
-        echo Installiere Offline Sky Map 3.3GB
+        echo Installing Offline Sky Map 3.3GB
         
-        echo Erstelle Verzeichnis C:\OfflineSkyMap
+        echo Creating directory C:\OfflineSkyMap
         if not exist "C:\OfflineSkyMap" mkdir "C:\OfflineSkyMap"
         
-        echo Lade Sky Map herunter 3.3GB
+        echo Downloading Sky Map 3.3GB
         curl -L --progress-bar -o "%TEMP%\FramingAssistantCache_Full.zip" "https://nighttime-imaging.eu/downloads/Setup/Releases/FramingAssistantCache_Full.zip"
 
         if exist "%TEMP%\FramingAssistantCache_Full.zip" (
-            echo Entpacke Sky Map nach C:\OfflineSkyMap
+            echo Extracting Sky Map to C:\OfflineSkyMap
             powershell -Command "Expand-Archive -Path '%TEMP%\FramingAssistantCache_Full.zip' -DestinationPath 'C:\OfflineSkyMap' -Force"
             del "%TEMP%\FramingAssistantCache_Full.zip" 2>nul
-            echo Sky Map erfolgreich entpackt
+            echo Sky Map successfully extracted
         ) else (
-            echo [FEHLER] Sky Map Download fehlgeschlagen
+            echo [ERROR] Sky Map Download failed
         )
     ) else (
-        echo Ueberspringe Sky Map - bereits installiert
+        echo Skipping Sky Map - already installed
     )
 ) else (
-    echo Ueberspringe Sky Map - nicht ausgewaehlt
+    echo Skipping Sky Map - not selected
 )
 echo.
 
 
 echo.
-echo Script beendet!
+echo Script completed!
 pause
