@@ -53,11 +53,7 @@ This repository provides a Windows batch script to simplify the installation of 
 ## Installation Process
 
 ### 1. Download & Execute
-```batch
-git clone https://github.com/yourusername/N.I.N.A-setup-script.git
-cd N.I.N.A-setup-script
-NINA-Setup.bat
-```
+Download NINA-Setup.bat and start it
 
 ### 2. Interactive Selection
 The script will prompt you to select which components to install:
@@ -88,12 +84,6 @@ Install D50 Star Database? (Y/N): Y
 - **ASCOM**: GitHub Releases (ASCOMInitiative/ASCOMPlatform)
 - **ASTAP**: SourceForge (astap-program)
 - **D50 Database**: SourceForge (astap-program)
-
-
-### Silent Installation
-- All installers support silent/unattended installation
-- No user interaction required during installation process
-- Automatic cleanup of temporary download files
 
 
 ## Troubleshooting
