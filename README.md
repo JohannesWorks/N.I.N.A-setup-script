@@ -66,7 +66,7 @@ The script will prompt you to select which components to install:
 Choose which programs to install:
 
 Install NINA? (Y/N): Y
-Install Offline Sky Map approx. 3.3 GB? (Y/N): Y
+Install Offline Sky Map Cache. 3.3 GB? (Y/N): Y
 Install PHD2? (Y/N): Y
 Install ASCOM? (Y/N): Y
 Install ASTAP? (Y/N): Y
