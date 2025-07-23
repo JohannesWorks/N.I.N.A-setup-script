@@ -359,7 +359,6 @@ if %installStellarium% equ 1 (
     if %stellariumInstalled% equ 0 (
         echo Installing Stellarium
         winget install --id=Stellarium.Stellarium 
-        echo Skipping Stellarium - already installed
     )
 ) else (
     echo Skipping Stellarium - not selected
