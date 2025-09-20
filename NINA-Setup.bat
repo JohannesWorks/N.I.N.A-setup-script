@@ -1,7 +1,7 @@
 @echo off
 
 echo ========================================
-echo NINA, PHD2, ASCOM, ASTAP, D50 & Sky Map Installation
+echo NINA, PHD2, ASCOM, ASTAP, D50 Database, Sky Map Installation
 echo ========================================
 echo.
 
@@ -24,12 +24,8 @@ if /i "%installAscom%"=="Y" (set "installAscom=1") else (set "installAscom=0")
 set /p "installAstap=Install ASTAP? (Y/N): "
 if /i "%installAstap%"=="Y" (set "installAstap=1") else (set "installAstap=0")
 
-if %installAstap% equ 1 (
-    set /p "installD50=Install D50 Star Database? (Y/N): "
-    if /i "%installD50%"=="Y" (set "installD50=1") else (set "installD50=0")
-) else (
-    set "installD50=0"
-)
+set /p "installD50=Install Astap D50 Star Database? (Y/N): "
+if /i "%installD50%"=="Y" (set "installD50=1") else (set "installD50=0")
 
 set /p "installStellarium=Install Stellarium? (Y/N): "
 if /i "%installStellarium%"=="Y" (set "installStellarium=1") else (set "installStellarium=0")
@@ -304,6 +300,10 @@ if %installAstap% equ 1 (
 echo.
 
 :: D50 Database Installation
+echo %d50Installed%
+echo d50Installed ----------------------------------
+echo %installD50%
+echo  installD50----------------------------------
 if %installD50% equ 1 (
     if %d50Installed% equ 0 (
         echo Installing D50 Star Database
